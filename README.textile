@@ -1,0 +1,24 @@
+h1. Description
+
+Klein is a lightweight Rails I18n database backend.
+
+h1. Setup
+
+h2. Setup migrations
+Create and run migrations with:
+<pre><code>
+rake klein:db:create
+rake db:migrate
+</code></pre>
+
+h2. Define backend
+And add the following to your ApplicationController:
+<pre><code>
+I18n.backend = I18n::Backend::KleinBackend.new  
+I18n.default_locale = :en
+</code></pre>
+
+h1. Todo
+
+* Tests
+* Lightweight Administration GUI

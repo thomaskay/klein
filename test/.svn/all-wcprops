@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnruby/!svn/ver/695/sso-caf/trunk/vendor/plugins/acts_as_tree/test
+END
+schema.rb
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnruby/!svn/ver/695/sso-caf/trunk/vendor/plugins/acts_as_tree/test/schema.rb
+END
+abstract_unit.rb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnruby/!svn/ver/695/sso-caf/trunk/vendor/plugins/acts_as_tree/test/abstract_unit.rb
+END
+database.yml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnruby/!svn/ver/695/sso-caf/trunk/vendor/plugins/acts_as_tree/test/database.yml
+END
+acts_as_tree_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnruby/!svn/ver/695/sso-caf/trunk/vendor/plugins/acts_as_tree/test/acts_as_tree_test.rb
+END
