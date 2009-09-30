@@ -6,6 +6,12 @@ Klein is a lightweight Rails I18n database backend.
 
 h2. Setup
 
+h3. Installation
+
+<pre><code>
+script/plugin install git@github.com:thomaskay/klein.git
+</code></pre>
+
 h3. Setup migrations
 
 Create and run migrations with:
