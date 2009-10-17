@@ -18,12 +18,18 @@ namespace :klein do
   task :import => [:environment] do 
     require 'translation'
     yaml_file = ENV['yaml_file']
+    
+    unless yaml_file
+      puts "\nMissing yamlfile\n\n"
+      puts "Specify with:"
+      puts "rake klein:import yaml_file='tmp/da.yml'\n\n"
+      exit
+    end
     yaml = YAML::load(File.open(yaml_file))
         
     yaml.each do |node|
       locale = node[0]
       hash = node[1]
-
       I18n::Backend::Translation.from_hash(locale, hash)
     end
   end
