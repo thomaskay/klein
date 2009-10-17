@@ -1,8 +1,8 @@
 class <%= class_name %> < ActiveRecord::Migration
   def self.up
     create_table :translations, :force => true do |t|
-      t.string :locale
-      t.string :key
+      t.string :locale, :null => false
+      t.string :key, :null => false
       t.string :text
     end
   end
