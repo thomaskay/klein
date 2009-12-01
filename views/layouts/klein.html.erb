@@ -4,6 +4,9 @@
   </head>
   <body>
     <h1>Klein</h1>
+    Modes: <%=link_to 'Stats', :action=>'index'%> | <%=link_to 'Filter', :action=>'filter' %> | <%= link_to 'Translate', :action=>'translate' %>
+    <div>
     <%= yield%>
+    </div>
   </body>
 </html>

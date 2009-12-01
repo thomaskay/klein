@@ -1,2 +1,23 @@
-<h2>index</h2>
-<%=I18n.available_locales.join('<br/>')%>
+<h2>Stats</h2>
+  <table>
+    <tr
+    <th>Locale</th>
+    <th>Total<br/>translations</th>
+    <th>Missing<br/>translations</th>
+    </tr>
+    
+<%I18n.available_locales.each do |locale|
+  local_total = I18n::Backend::Translation.count(:conditions=>{:locale=>locale.to_s})
+  %>
+<tr>
+  <td><%=locale%></td>
+  <td><%=local_total%></td>
+  <td><%=@total_translation_keys-local_total%></td>
+  <td><%=link_to 'Translate', :action =>'translate', :locale=>locale%>
+</tr>  
+
+  
+  
+  
+<% end %>
+  </table>
