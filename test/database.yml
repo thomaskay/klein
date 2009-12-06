@@ -1,0 +1,25 @@
+sqlite:
+  adapter: sqlite
+  database: vendor/plugins/klein/test/klein_plugin.sqlite.db
+  encoding: utf8
+  
+sqlite3:
+  adapter: sqlite3
+  database: vendor/plugins/klein/test/klein_plugin.sqlite3.db
+  encoding: utf8  
+
+postgresql:
+  adapter: postgresql
+  username: postgres
+  password: postgres
+  database: klein_plugin_test
+  min_messages: ERROR
+  encoding: utf8  
+
+mysql:
+  adapter: mysql
+  host: localhost
+  username: root
+  password: 
+  database: klein_plugin_test
+  encoding: utf8  
