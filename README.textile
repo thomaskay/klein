@@ -8,34 +8,25 @@ h2. Setup
 
 h3. Installation
 
-<pre><code>
-script/plugin install git@github.com:thomaskay/klein.git
-</code></pre>
+<pre><code>script/plugin install git@github.com:thomaskay/klein.git</code></pre>
 
 h3. Setup migrations
 
 Create and run migrations with:
-<pre><code>
-rake klein:setup
-rake db:migrate
-</code></pre>
+<pre><code>rake klein:setup
+rake db:migrate</code></pre>
 
 h3. Import existing translations from yaml files
-<pre><code>
-rake klein:import yaml_file='tmp/da.yml'
-</code></pre>
+<pre><code>rake klein:import yaml_file='tmp/da.yml'</code></pre>
 
 h3. Define backend
 
 And add the following to your environment:
-<pre><code>
-I18n.backend = I18n::Backend::KleinBackend.new  
-I18n.default_locale = :en
-</code></pre>
+<pre><code>I18n.backend = I18n::Backend::KleinBackend.new  
+I18n.default_locale = :en</code></pre>
 
-h2. Todo
+h2. Things to do
 
-* Tests
 * Lightweight Administration GUI
 * Basic authentication
 * Google traslation lookup
