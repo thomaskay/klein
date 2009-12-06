@@ -1,0 +1,15 @@
+railroad_en:
+  id: 1
+  locale: en
+  key: railroad
+  text: Railroad
+railroad_da:
+  id: 2
+  locale: da
+  key: railroad
+  text: Jernbane
+train_en:
+  id: 3
+  locale: en
+  key: train
+  text: Train
