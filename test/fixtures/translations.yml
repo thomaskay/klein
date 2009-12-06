@@ -13,3 +13,8 @@ train_en:
   locale: en
   key: train
   text: Train
+chartest_da:
+  id: 4
+  locale: da
+  key: chartest
+  text: Jordbærgrød
