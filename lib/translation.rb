@@ -1,7 +1,7 @@
 module I18n  
   module Backend
 
-    class Translation < ActiveRecord::Base
+    class Translation < ActiveRecord::Base      
     
       def path
         key.split('.').slice(0..-2)
@@ -48,7 +48,7 @@ module I18n
           obj.text = value
           obj.save
         end
-      end
+      end      
     end
   end
 end

@@ -1,12 +1,79 @@
 <html>
   <head>
-    <title>Klein Internationalization</title>
+    <title>Klein Interface</title>
+    
+    <style>    
+      body{ margin:0px;font-family:helvetica,verdana;}    
+      #header{ background-color:#ececec;padding:10px;border-bottom:2px solid #cccccc;}
+      #header h1{ padding:0px;margin:0 0 5px}
+      #wrap{ padding:10px;}
+      input[type='text']{ width: 220px;}
+      input[type='submit'], input[type='button']{ width: 80px;}      
+      textarea{ width:100%; height:50px;}
+      select{ width:100px;}
+      .content{ background-color:#eeeeee; width:600px; padding:10px; margin-bottom:10px;}
+      .actions{ text-align:right;}
+      .key {font-size:75%; float:left;}
+      
+    </style>
+
+    <%= javascript_include_tag :defaults %>    
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+          google.load("language", "1");
+
+          function auto_translate(text,from,to,id){
+            google.language.translate(text, from, to, function(result) {
+              if (!result.error) {
+                $('text_'+id).value = result.translation;
+              }
+            });
+          }  
+          
+          function skip(id,locale){
+            $('content_'+id).fade({'duration':0.2});
+            $('count').fade({'duration':0.2});
+          }
+          
+          function save(id,locale){
+            var text= $('text_'+id).value;
+            new Ajax.Request('<%=url_for(:action=>'save')%>', {
+              method: 'get',
+              parameters: {'id':id,'locale':locale,'text':text},
+              onSuccess: function(transport) {
+                $('content_'+id).fade();
+                $('count').fade({'duration':0.2});                
+              }
+            });              
+          }
+          
+          
+    </script>
+    
+    
+    
   </head>
   <body>
-    <h1>Klein</h1>
-    Modes: <%=link_to 'Stats', :action=>'index'%> | <%=link_to 'Filter', :action=>'filter' %> | <%= link_to 'Translate', :action=>'translate' %>
-    <div>
-    <%= yield%>
+    <div id="header">
+    <h1>Klein Interface</h1>
+    
+    <% form_tag do %>
+      Filter: 
+      <%= text_field_tag 'filter', @filter%>    
+    
+      <%= select_tag 'includes', options_for_select(['Translated','Untranslated','All'],@includes) %>    
+      <%= select_tag 'locale', options_for_select(I18n.available_locales, :selected => (@locale.nil?? I18n.locale : @locale).to_sym) %>
+
+      <%= submit_tag 'Search'%>
+    
+    
+    <% end%>
+    </div>
+
+
+
+    <div id="wrap">
+      <%= yield%>
     </div>
   </body>
 </html>

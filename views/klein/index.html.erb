@@ -1,23 +1,23 @@
-<h2>Stats</h2>
-  <table>
-    <tr
-    <th>Locale</th>
-    <th>Total<br/>translations</th>
-    <th>Missing<br/>translations</th>
-    </tr>
-    
-<%I18n.available_locales.each do |locale|
-  local_total = I18n::Backend::Translation.count(:conditions=>{:locale=>locale.to_s})
-  %>
-<tr>
-  <td><%=locale%></td>
-  <td><%=local_total%></td>
-  <td><%=@total_translation_keys-local_total%></td>
-  <td><%=link_to 'Translate', :action =>'translate', :locale=>locale%>
-</tr>  
+<% if @translations%>
+  <p id="count"><em><%=@keys.length%> translations found</em></p>
 
-  
-  
-  
-<% end %>
-  </table>
+  <% @keys.each do |key|
+    default_translation = @default_translations_hash[key]
+    translation = @translations_hash[key]
+  %>
+
+  <div id="content_<%=default_translation.id%>" class="content">
+    <%= default_translation.text%><br/>
+    <textarea id="text_<%=default_translation.id%>"><%=translation.text if translation%></textarea><br/>
+      
+    <div class="key">
+        [<%=key%>]
+    </div>
+
+    <div class="actions">
+      <input type="button" value="Auto" onclick="javascript:auto_translate('<%=escape_javascript( default_translation.text)%>','<%=I18n.default_locale.to_s%>','<%=@locale%>',<%=default_translation.id%>)"/> <input type="button" value="Save"onclick="javascript:save(<%=default_translation.id%>,'<%=@locale%>')"/> <input type="button" value="Skip" onclick="javascript:skip(<%=default_translation.id%>,'<%=@locale%>')"/>
+    </div>
+  </div>
+  <% end%>
+
+<%end%>

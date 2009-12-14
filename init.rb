@@ -1,6 +1,7 @@
 require 'klein_backend'
 require 'translation'
-require "routing"
+require 'klein_routing'
+require 'klein_filter'
 
 %w{ models controllers helpers}.each do |dir|
   path = File.join(File.dirname(__FILE__), dir)

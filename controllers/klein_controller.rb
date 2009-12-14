@@ -1,24 +1,59 @@
 class KleinController < ActionController::Base
-
+  before_filter Klein::KleinFilter
+  
   layout 'klein'
 
-
   def index
-    @total_translation_keys = I18n::Backend::Translation.count(:key,:distinct=>true)
+    if params[:commit]
+      @locale = params[:locale]
+      @includes = params[:includes]
+      @filter = params[:filter]    
     
-#render :text => "Squawk!"
+      query = "1=1"
+      query += " AND (`key` like '%#{@filter}%' OR text like '%#{@filter}%')" unless @filter.empty?
+
+      @translations = I18n::Backend::Translation.find(:all, :conditions=> query + " AND locale = '#{@locale}'" )
+      @default_translations = I18n::Backend::Translation.find(:all, :conditions=> query + " AND locale = '#{I18n.default_locale.to_s}'")
+
+      @default_translations_keys = @default_translations.collect{|e|e.key}
+      @translations_keys = @translations.collect{|e|e.key}      
+
+      @translations_hash = Hash.new
+      @translations.each{|e| @translations_hash[e.key]=e}
+
+      @default_translations_hash = Hash.new
+      @default_translations.each{|e| @default_translations_hash[e.key]=e}
+
+      if @includes == 'Translated'
+        @keys = @default_translations_keys & @translations_keys
+      elsif @includes == 'Untranslated'
+        @keys = @default_translations_keys - @translations_keys
+      else
+        @keys = @default_translations_keys
+      end
+    end
+    
   end
   
-  def translate
-    
+  def skip
+        
   end
 
-  def filter
+  def save
+    id = params[:id]
+    locale = params[:locale]
+    text = params[:text]
     
+    default_translation = I18n::Backend::Translation.find(id)
     
+    t = I18n::Backend::Translation.find_or_create_by_key_and_locale(:key => default_translation.key, :locale => locale)
+    t.key = default_translation.key
+    t.locale = locale
+    t.text = text
+    t.save
+    
+    render :json=>{:status=>'ok'}
   end
-
-
 
 end
 
