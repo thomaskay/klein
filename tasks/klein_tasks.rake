@@ -3,7 +3,7 @@
 namespace :klein do
 
   desc "Creates translation table migration for use with Klein"
-  task :setup do
+  task :setup => :environment do
     require 'rails_generator'
     require 'rails_generator/scripts/generate'
 
@@ -15,7 +15,7 @@ namespace :klein do
   end
   
   desc "Import translations from a yaml file"
-  task :import => [:environment] do 
+  task :import => :environment do 
     require 'translation'
     yaml_file = ENV['yaml_file']
     
