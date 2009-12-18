@@ -25,9 +25,14 @@ And add the following to your environment:
 <pre><code>I18n.backend = I18n::Backend::KleinBackend.new  
 I18n.default_locale = :en</code></pre>
 
+h2. Interface
+
+The interface can be enabled by adding the following to your routes: 
+<pre><code>map.klein</code></pre>
+
+The interface is protected with basic authentication. 
+
 h2. Things to do
 
-* Lightweight Administration GUI
-* Basic authentication
-* Google traslation lookup
-* Easy routes setup
+* Making it possible to override the authentication filter used.
+* Making it easier to add a new locale.
