@@ -1,0 +1,13 @@
+<% form_tag( {:action => 'create'}, :id=>'createform') do %>
+
+  <h3>Create a new text</h3>
+  <p><label for="translation_key">Key:</label>
+  <%= text_field 'translation', 'key' %></p>
+
+  <p><label for="translation_text">Text:</label>
+  <%= text_field 'translation', 'text' %></p>
+
+  <%= submit_tag 'Create' %>  
+
+
+<% end %>
