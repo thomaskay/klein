@@ -4,7 +4,7 @@ class KleinController < ActionController::Base
   layout 'klein'
 
   def index
-    if params[:commit]
+    if params[:locale]
       @locale = params[:locale]
       @includes = params[:includes]
       @filter = params[:filter]    
@@ -54,6 +54,23 @@ class KleinController < ActionController::Base
     
     render :json=>{:status=>'ok'}
   end
+  
+  def new
+    @translation = I18n::Backend::Translation.new
+  end
+  
+  def create
+    @translation = I18n::Backend::Translation.new(params[:translation])
+    @translation.locale = I18n.default_locale.to_s
+    if @translation.save
+      flash[:notice] = 'Translation saved'
+      redirect_to :action => 'new'
+    else
+      render :action => 'new'
+    end
+  end  
+  
+  
 
 end
 
