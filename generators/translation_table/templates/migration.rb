@@ -3,7 +3,7 @@ class <%= class_name %> < ActiveRecord::Migration
     create_table :translations, :force => true do |t|
       t.string :locale, :null => false
       t.string :key, :null => false
-      t.string :text
+      t.text :text
     end
   end
 
