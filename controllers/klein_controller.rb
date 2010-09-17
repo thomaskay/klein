@@ -70,6 +70,12 @@ class KleinController < ActionController::Base
     end
   end  
   
+  def flush
+    I18n.backend.load_from_db
+    flash[:notice] = 'Translations flushed'
+    redirect_to :action => 'index'
+  end
+  
   
 
 end

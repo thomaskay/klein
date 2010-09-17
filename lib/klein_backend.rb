@@ -1,14 +1,10 @@
 module I18n  
   module Backend  
     class KleinBackend < Simple  
-      protected  
-  
-      def init_translations  
-        load_from_db
-        @initialized = true  
-      end  
-      
+
       def load_from_db  
+        puts "loading from db"
+        
         map = {}
         
         I18n::Backend::Translation.find(:all).each do |t|
@@ -18,6 +14,14 @@ module I18n
           merge_translations(locale, t.to_hash)
         end
       end 
+
+      protected  
+  
+      def init_translations  
+        load_from_db
+        @initialized = true  
+      end  
+      
     end  
   end  
 end

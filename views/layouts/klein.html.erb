@@ -15,9 +15,10 @@
       .actions{ text-align:right;}
       .key {font-size:75%; float:left;}
       a { color:#000000;}
-      a.createnew{font-size:75%; margin-left:100px;}
+      .menu{font-size:75%; margin-left:100px;}
       #createform label{width:60px; display:block; float:left;} 
       #createform input[type='submit']{margin-left:60px;}
+      .notice{border: 1px solid #FFF18C;background-color: #FFFFCC; padding:4px;}
     </style>
 
     <%= javascript_include_tag :defaults %>    
@@ -68,12 +69,18 @@
       <%= select_tag 'locale', options_for_select(I18n.available_locales, :selected => (@locale.nil?? I18n.locale : @locale).to_sym) %>
 
       <%= submit_tag 'Search'%>
-    <%= link_to 'Create new', {:action=>'new'},:class=>'createnew' %>
+      <span class="menu">
+        <%= link_to 'Create new', {:action=>'new'}%> | 
+        <%= link_to 'Flush', {:action=>'flush'} %>    
+      </span>
     
     <% end%>
     </div>
-
+    <% if flash[:notice] %>
+    <div class="notice">
     <%= flash[:notice] %>
+    </div>
+    <% end %>
 
     <div id="wrap">
       <%= yield%>
