@@ -18,7 +18,7 @@
       .menu{font-size:75%; margin-left:100px;}
       #createform label{width:60px; display:block; float:left;} 
       #createform input[type='submit']{margin-left:60px;}
-      .notice{border: 1px solid #FFF18C;background-color: #FFFFCC; padding:4px;}
+      #notice{border: 1px solid #FFF18C;background-color: #FFFFCC; padding:4px;}
     </style>
 
     <%= javascript_include_tag :defaults %>    
@@ -77,9 +77,12 @@
     <% end%>
     </div>
     <% if flash[:notice] %>
-    <div class="notice">
+    <div id="notice">
     <%= flash[:notice] %>
     </div>
+    <script type="text/javascript">
+      $('notice').fade({ duration: 0.2, delay: 5})
+    </script>
     <% end %>
 
     <div id="wrap">
