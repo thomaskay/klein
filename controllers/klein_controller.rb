@@ -45,8 +45,13 @@ class KleinController < ActionController::Base
     text = params[:text]
     
     default_translation = I18n::Backend::Translation.find(id)
+
+    #use binary to avoid case insensitivity
+    t = I18n::Backend::Translation.find_by_sql(["select * from translations where binary(`key`) = ? and locale = ? limit 1", default_translation.key, locale]).first
+    if t.nil?
+      t = I18n::Backend::Translation.new
+    end
     
-    t = I18n::Backend::Translation.find_or_create_by_key_and_locale(:key => default_translation.key, :locale => locale)
     t.key = default_translation.key
     t.locale = locale
     t.text = text
